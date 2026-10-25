@@ -1,45 +1,50 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String
+from sqlalchemy import String, Boolean, DateTime
+from datetime import datetime
 
-from core.db import Base
+from app.core.db import Base
+
 
 class User(Base):
     __tablename__ = 'users'
 
-    id: Mapped[str] = mapped_column(primary_key=True)
+    id: Mapped[str] = mapped_column(String, primary_key=True)
 
     email: Mapped[str] = mapped_column(
-        String, 
-        unique=True, 
+        String(100),
+        unique=True,
         nullable=False
     )
 
     password: Mapped[str] = mapped_column(
-        String, 
+        String(100),
         nullable=False
     )
 
     name: Mapped[str] = mapped_column(
-        String, 
+        String(100),
         nullable=False
     )
 
     last_name: Mapped[str] = mapped_column(
-        String, 
+        String(100),
         nullable=False
     )
 
-    is_activate: Mapped[str] = mapped_column(
-        String, 
-        nullable=False
+    is_activate: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=True
     )
 
-    is_verified: Mapped[str] = mapped_column(
-        String, 
-        nullable=False
+    is_verified: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False
     )
 
-    created_at: Mapped[str] = mapped_column(
-        String, 
-        nullable=False
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        nullable=False,
+        default=datetime.utcnow
     )

@@ -25,7 +25,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://diego2011:123456@db:5432/mibolsillo
+      DATABASE_URL: postgresql+psycopg2://diego2011:123456@db:5432/mibolsillo
       APP_ENV: development
     ports:
       - "8000:8000"
