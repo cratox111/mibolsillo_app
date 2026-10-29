@@ -31,5 +31,5 @@ async def login(form: Annotated[OAuth2PasswordRequestForm, Depends()], db: Sessi
 
 
 @router.get("/me", response_model=UserResponse, status_code=200)
-async def me(db: Session = Depends(get_db), token = Depends(oauth)):
+async def me(token: str = Depends(oauth), db: Session = Depends(get_db)):
     return service_me(token=token, db=db)
