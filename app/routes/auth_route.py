@@ -1,14 +1,16 @@
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import Annotated
 
 from app.services.auth_services import service_register, service_login, service_me
 from app.schemas.user_schema import UserCreate, UserResponse
+from app.core.security import oauth
 from app.core.db import get_db
 
+
 router = APIRouter(prefix="/auth", tags=["auth"])
-oauth = OAuth2PasswordBearer(tokenUrl="auth/login")
+
 
 
 @router.post("/register", response_model=UserCreate, status_code=201)

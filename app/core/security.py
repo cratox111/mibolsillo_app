@@ -1,4 +1,5 @@
 from datetime import timedelta, datetime, timezone
+from fastapi.security import OAuth2PasswordBearer
 from fastapi import HTTPException, status
 from pwdlib import PasswordHash
 from jose import jwt
@@ -7,7 +8,7 @@ from app.core.config import ALGORITHM, SECRET_KEY
 
 
 pwd_hash = PasswordHash.recommended()
-
+oauth = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 def hash_password(password):
     password_hashed = pwd_hash.hash(password)

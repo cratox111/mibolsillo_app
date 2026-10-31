@@ -1,6 +1,7 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, DateTime
 from datetime import datetime
+from typing import List
 
 from app.core.db import Base
 
@@ -48,3 +49,5 @@ class User(Base):
         nullable=False,
         default=datetime.utcnow
     )
+
+    category: Mapped[List["Category"]] = relationship(back_populates="parent")
